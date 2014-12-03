@@ -7,7 +7,7 @@ install: bundle install
 branches:
   only:
     - master
-	- /^release-.*$/
+    - /^release-.*$/
 env:
   - DB=postgresql
 script:
