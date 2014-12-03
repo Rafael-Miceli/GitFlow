@@ -1,0 +1,24 @@
+language: ruby
+rvm:
+  - "1.9.3"
+  - "2.0.0"
+install: bundle install
+#whitelist
+branches:
+  only:
+    - master
+	- /^release-.*$/
+env:
+  - DB=postgresql
+script:
+  - RAILS_ENV=test bundle exec rake --trace db:migrate
+  - bundle exec rake db:test:prepare
+before_script:
+  - psql -c 'create database ruby_getting_started_test' -U postgres
+deploy:
+  provider: heroku
+  api_key: 45b212c8-7541-4603-ad99-ebf68017f826
+  app: arcane-retreat-6573
+#install: bundle install
+# uncomment this line if your project needs to run something other than `rake`:
+# script: bundle exec rspec spec
